@@ -20,15 +20,20 @@ class FenwickTree:
         """
         return val & -val
 
-    def insert(self, index: int, val: int) -> None:
-        pass
+    def add(self, index: int, val: int) -> None:
+        while index < len(self.tree):
+            self.tree[index] += val
+            index += self.least_significant_bit(index)
 
     def sum(self, i: int, j: int) -> int:
         # Notice the minus is not inclusive for i, because we want to include it in the range
-        return self.prefix_sum(j) - self.prefix_sum(i-1)
+        return self.prefix_sum(j) - self.prefix_sum(i - 1)
 
     def set(self, index: int, val: int) -> None:
-        pass
+        # First find what value is currently stored in position index
+        value = self.sum(index, index)
+        # Then we add the difference between the new value and current value
+        self.add(index, val - value)
 
     def prefix_sum(self, index) -> int:
         i = index
