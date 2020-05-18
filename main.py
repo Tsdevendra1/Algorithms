@@ -19,5 +19,9 @@ def x(N):
     return ret
 
 
-if __name__ == "__main__":
+def main():
     x(3)
+
+
+if __name__ == "__main__":
+    main()
