@@ -15,7 +15,10 @@
 #include <numeric>
 #include <sstream>
 
+
 using namespace std;
+
+#include "prefix-sufix/z_algorithm.h"
 
 class Solution {
     vector<vector<int>> answer = {{}};
@@ -41,9 +44,6 @@ public:
     }
 };
 int main() {
-    char x = 'a';
-    bool r = 'a' < 9999;
-    min(3, 3)
-    cout << r << endl;
-return 0;
+    testZAlgorithm();
+    return 0;
 }
