@@ -14,6 +14,7 @@
 
 #include <numeric>
 #include <sstream>
+#include "prefix-sufix/KMP.h"
 
 
 using namespace std;
@@ -46,6 +47,7 @@ public:
 };
 int main() {
 //    testZAlgorithm();
-    testLongest();
+//    testLongest();
+    testKMP();
     return 0;
 }
