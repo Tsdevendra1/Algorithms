@@ -36,45 +36,42 @@ void computeLPSArray(string &pattern, int patternLength, int lps[]) {
                 lengthLongestPrefixSuffix = lps[lengthLongestPrefixSuffix - 1];
             } else {
                 lps[i] = 0;
-                i++;
+                ++i;
             }
         }
     }
 }
 
 void KMPSearch(string pat, string txt) {
-    int M = pat.size();
-    int N = txt.size();
+    int patternLength = pat.size();
+    int textLength = txt.size();
 
-    // create lps[] that will hold the longest prefix suffix
-    // values for pattern
-    int lps[M];
+    int lps[patternLength];
 
-    // Preprocess the pattern (calculate lps[] array)
-    computeLPSArray(pat, M, lps);
+    computeLPSArray(pat, patternLength, lps);
 
-    int i = 0; // index for txt[]
-    int j = 0; // index for pat[]
-    while (i < N) {
-        if (pat[j] == txt[i]) {
-            j++;
-            i++;
+    int txtIndex = 0;
+    int patternIndex = 0;
+    while (txtIndex < textLength) {
+        if (pat[patternIndex] == txt[txtIndex]) {
+            ++txtIndex;
+            ++patternIndex;
         }
-
-        if (j == M) {
-            printf("Found pattern at index %d ", i - j);
-            j = lps[j - 1];
-        } else if (i < N && pat[j] != txt[i]) {
-            if (j != 0)
-                j = lps[j - 1];
-            else
-                i = i + 1;
+        if (patternIndex == patternLength) {
+            printf("Found pattern at index %d ", txtIndex - patternIndex);
+            patternIndex = lps[patternIndex - 1];
+        } else if (txtIndex < textLength && pat[patternIndex] != txt[txtIndex]) {
+            if (patternIndex != 0) {
+                patternIndex = lps[patternIndex - 1];
+            } else {
+                ++txtIndex;
+            }
         }
     }
 }
 
 void testKMP() {
     string text = "GEEKS FOR GEEKS";
-    string pattern = "GEEK";
+    string pattern = "GEEKS";
     KMPSearch(pattern, text);
 }
