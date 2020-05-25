@@ -1,0 +1,12 @@
+//
+// Created by Tharuka Devendra on 25/05/2020.
+//
+
+#ifndef ALGORITHMS_LONGESTPALINDROMSUB_H
+#define ALGORITHMS_LONGESTPALINDROMSUB_H
+
+
+void testLongest();
+
+
+#endif //ALGORITHMS_LONGESTPALINDROMSUB_H

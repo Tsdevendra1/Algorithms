@@ -19,6 +19,7 @@
 using namespace std;
 
 #include "prefix-sufix/z_algorithm.h"
+#include "prefix-sufix/LongestPalindromSub.h"
 
 class Solution {
     vector<vector<int>> answer = {{}};
@@ -44,6 +45,7 @@ public:
     }
 };
 int main() {
-    testZAlgorithm();
+//    testZAlgorithm();
+    testLongest();
     return 0;
 }
