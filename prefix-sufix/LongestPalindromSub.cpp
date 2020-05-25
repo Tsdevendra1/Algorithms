@@ -58,7 +58,7 @@ int longestPalindromSub(string &str) {
     return maxPaliLength;
 }
 
-int longestPalSubstr(string str) {
+int longestPalindromBetter(string str) {
     int maxLength = 1; // The result (length of LPS)
 
     int start = 0;
@@ -105,4 +105,5 @@ int longestPalSubstr(string str) {
 void testLongest() {
     string testString = "wklqjewlkqjerttrekjlejwqlej";
     cout << longestPalindromSub(testString) << endl;
+    cout << longestPalindromBetter(testString) << endl;
 }
