@@ -14,13 +14,15 @@
 
 #include <numeric>
 #include <sstream>
-#include "prefix-sufix/KMP.h"
+#include "strings/KMP.h"
+#include "strings/z_algorithm.h"
+#include "strings/LongestPalindromSub.h"
+#include "strings/DeBruijn.h"
+#include "graphs/Hierholzer.h"
 
 
 using namespace std;
 
-#include "prefix-sufix/z_algorithm.h"
-#include "prefix-sufix/LongestPalindromSub.h"
 
 class Solution {
     vector<vector<int>> answer = {{}};
@@ -48,6 +50,8 @@ public:
 int main() {
 //    testZAlgorithm();
 //    testLongest();
-    testKMP();
+//    testKMP();
+    testDeBruijn();
+//    testHierholzer();
     return 0;
 }
