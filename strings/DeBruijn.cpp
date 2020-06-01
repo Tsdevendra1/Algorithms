@@ -39,19 +39,14 @@ void dfs(string node, int &k, string &A) {
 
 string deBruijn(int n, int k, string A) {
 
-    // Clearing global variables
-    seen.clear();
-    edges.clear();
-
     string startingNode = string(n - 1, A[0]);
     dfs(startingNode, k, A);
 
     string S;
 
     // Number of edges
-    int l = pow(k, n);
 
-    for (int i = 0; i < l; ++i)
+    for (int i = 0; i < edges.size(); ++i)
         S += A[edges[i]];
     S += startingNode;
 

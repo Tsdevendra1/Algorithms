@@ -47,11 +47,36 @@ public:
         return answer;
     }
 };
+string r(){
+    string s;
+    if (s.empty()){
+        return "";
+    }
+    string currentString;
+    string finalString;
+    for (int i=s.size()-1; i>=0; --i) {
+        char current = s[i];
+        if (current == ' '){
+            currentString += ' ' + finalString;
+            finalString = currentString;
+            currentString = "";
+        } else {
+            currentString.push_back(current);
+        }
+    }
+    finalString = currentString + ' ' + finalString;
+
+    finalString.pop_back();
+    return finalString;
+}
 int main() {
 //    testZAlgorithm();
 //    testLongest();
 //    testKMP();
     testDeBruijn();
 //    testHierholzer();
+    for (int i=3; 0 < i; --i){
+        cout << i << endl;
+    }
     return 0;
 }
