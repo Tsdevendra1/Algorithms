@@ -38,7 +38,9 @@ public:
         for (int i = 0; i < initialArray.size(); ++i) {
             int treeIndex = i + 1;
             int parentIndex = treeIndex + (treeIndex & -treeIndex);
-            tree[parentIndex] += tree[treeIndex];
+            if (parentIndex < tree.size()){
+                tree[parentIndex] += tree[treeIndex];
+            }
         }
     }
 
