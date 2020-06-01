@@ -15,6 +15,9 @@ void testFenwick(){
     assert(fenwick->prefixSum(4) == 15);
     assert(fenwick->prefixSum(5) == 21);
 
+    assert(fenwick->rangeQuery(0, 2) == 6);
+
     fenwick->add(0, 2);
     assert(fenwick->prefixSum(0) == 3);
+
 }

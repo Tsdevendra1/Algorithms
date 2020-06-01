@@ -29,7 +29,7 @@ class Fenwick {
 
 public:
     void construct(vector<int> initialArray) {
-        tree.resize(initialArray.size()+1);
+        tree.resize(initialArray.size() + 1);
         for (int i = 0; i < initialArray.size(); ++i) {
             int treeIndex = i + 1;
             tree[treeIndex] = initialArray[i];
@@ -38,7 +38,7 @@ public:
         for (int i = 0; i < initialArray.size(); ++i) {
             int treeIndex = i + 1;
             int parentIndex = treeIndex + (treeIndex & -treeIndex);
-            if (parentIndex < tree.size()){
+            if (parentIndex < tree.size()) {
                 tree[parentIndex] += tree[treeIndex];
             }
         }
@@ -52,6 +52,10 @@ public:
             current -= (current & -current);
         }
         return sum;
+    }
+
+    int rangeQuery(int start, int end) {
+        return prefixSum(end) - prefixSum(start - 1);
     }
 
     void add(int index, int value) {
