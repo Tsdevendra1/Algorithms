@@ -20,7 +20,6 @@
 #include <stack>
 #include <numeric>
 #include <sstream>
-
 using namespace std;
 
 
