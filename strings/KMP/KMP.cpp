@@ -16,7 +16,6 @@
 #include <string>
 #include <numeric>
 #include <sstream>
-
 using namespace std;
 
 #include "KMP.h"
