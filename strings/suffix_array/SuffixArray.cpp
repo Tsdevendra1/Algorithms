@@ -28,8 +28,6 @@ struct suffix {
     int rank[2]; // To store ranks and next rank pair
 };
 
-// A comparison function used by sort() to compare two suffixes
-// Compares two pairs, returns 1 if first pair is smaller
 int cmp(struct suffix a, struct suffix b) {
     return (a.rank[0] == b.rank[0]) ? (a.rank[1] < b.rank[1] ? 1 : 0) :
            (a.rank[0] < b.rank[0] ? 1 : 0);
@@ -79,6 +77,46 @@ vector<int> buildSuffixArray(string &txt) {
     return suffixArray;
 }
 
+
+vector<int> kasai(string &txt, vector<int> &suffixArr) {
+
+    int n = suffixArr.size();
+    int suffixArrSize = suffixArr.size();
+
+    // To store LCP array
+    vector<int> lcp(n, 0);
+
+    vector<int> invSuff(n);
+
+    for (int i = 0; i < n; i++)
+        invSuff[suffixArr[i]] = i;
+
+    int k = 0;
+
+    for (int i = 0; i < n; i++) {
+        int positionInSuffixArray = invSuff[i];
+        int positionInTextFirst = i;
+        if (positionInSuffixArray == suffixArrSize - 1) {
+            k = 0;
+            continue;
+        }
+
+        int positionInTextSecond = suffixArr[positionInSuffixArray + 1];
+
+        while (positionInTextFirst + k < suffixArrSize && positionInTextSecond + k < suffixArrSize &&
+               txt[positionInTextFirst + k] == txt[positionInTextSecond + k]) {
+            ++k;
+        }
+
+        lcp[positionInSuffixArray] = k;
+
+        if (k > 0)
+            k--;
+    }
+
+    return lcp;
+}
+
 void printArr(vector<int> &arr) {
     for (int i : arr)
         cout << i << " ";
@@ -86,7 +124,11 @@ void printArr(vector<int> &arr) {
 }
 
 void testSuffixArray() {
-    string txtNew = "qlkjwalksjlsadkjwn";
+    string txtNew = "banana";
     vector<int> answer = buildSuffixArray(txtNew);
-    printArr(answer);
+
+    vector<int> lcpArray = kasai(txtNew, answer);
+    vector<int> expectedLcpArray = {1, 3, 0, 0, 2, 0};
+    assert(expectedLcpArray == lcpArray);
+    printArr(lcpArray);
 }
