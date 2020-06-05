@@ -27,8 +27,35 @@ using namespace std;
 
 void merge(vector<int> &arr, int leftIndex, int rightIndex) {
     int currentLeft = leftIndex;
+    int middle = leftIndex + rightIndex / 2;
     int currentRight = rightIndex;
-    int currentArrayPosition = 0;
+    int currentArrayPosition = leftIndex;
+
+    while (currentLeft < middle || currentRight > middle) {
+        if (arr[currentLeft] < arr[currentRight]) {
+            arr[currentArrayPosition] = arr[currentLeft];
+            ++currentLeft;
+        } else {
+            arr[currentArrayPosition] = arr[currentRight];
+            ++currentRight;
+        }
+        ++currentArrayPosition;
+    }
+
+    while (currentLeft < middle) {
+        arr[currentArrayPosition] = arr[currentLeft];
+        ++currentLeft;
+        ++currentArrayPosition;
+
+    }
+
+    while (currentRight > middle) {
+        arr[currentArrayPosition] = arr[currentRight];
+        ++currentRight;
+        ++currentArrayPosition;
+    }
+
+
 }
 
 void mergeSort(vector<int> &arr, int leftIndex, int rightIndex) {
