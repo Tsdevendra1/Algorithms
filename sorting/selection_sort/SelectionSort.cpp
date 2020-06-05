@@ -10,9 +10,9 @@
 using namespace std;
 
 void selectionSort(vector<int> &arr) {
-    for (int endPosition = (int) arr.size() - 1; endPosition >= 0; ++endPosition) {
+    for (int endPosition = (int) arr.size() - 1; endPosition >= 0; --endPosition) {
         int positionOfMax = 0;
-        for (int i = 0; i < endPosition; ++i) {
+        for (int i = 0; i < endPosition+1; ++i) {
             if (arr[i] > arr[positionOfMax]) {
                 positionOfMax = i;
             }
