@@ -5,22 +5,8 @@
 #include "Trie.h"
 
 #include <iostream>
-#include <cstring>
 #include <algorithm>
-#include <string>
 #include <vector>
-#include <vector>
-#include <iostream>
-#include <queue>
-#include <unordered_set>
-#include <unordered_map>
-#include <string>
-#include <map>
-#include <set>
-#include <iostream>
-#include <string>
-#include <numeric>
-#include <sstream>
 using namespace std;
 
 int ALPHABET_SIZE = 26;
