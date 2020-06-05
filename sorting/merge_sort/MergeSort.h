@@ -10,5 +10,6 @@ class MergeSort {
 
 };
 
+void testMergeSort();
 
 #endif //ALGORITHMS_MERGESORT_H
