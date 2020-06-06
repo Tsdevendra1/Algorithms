@@ -26,12 +26,15 @@ using namespace std;
 
 class Graph {
 
-    unordered_map<int, unordered_map<int, int>> edges;
     unordered_set<int> uniqueNodes;
 
 
 public:
     void setupDAG();
+
+    unordered_map<int, unordered_map<int, int>> edges;
+
+    void setupSimpleDag();
 
     int numberOfNodes() const {
         return (int) uniqueNodes.size();

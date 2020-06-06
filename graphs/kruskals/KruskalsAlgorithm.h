@@ -10,6 +10,6 @@ class KruskalsAlgorithm {
 
 };
 
-void testKruskals();
+void testKruskalsAlgorithm();
 
 #endif //ALGORITHMS_KRUSKALSALGORITHM_H

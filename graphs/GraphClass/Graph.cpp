@@ -43,3 +43,11 @@ void Graph::setupDAG() {
     this->addEdge('g', 'i');
 
 }
+
+void Graph::setupSimpleDag() {
+    this->addEdge(0, 1, 10);
+    this->addEdge(0, 2, 6);
+    this->addEdge(0, 3, 5);
+    this->addEdge(1, 3, 15);
+    this->addEdge(2, 3, 4);
+}
