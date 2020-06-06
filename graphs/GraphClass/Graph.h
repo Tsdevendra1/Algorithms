@@ -26,7 +26,7 @@ using namespace std;
 
 class Graph {
 
-    unordered_map<int, unordered_set<int>> edges;
+    unordered_map<int, unordered_map<int, int>> edges;
     unordered_set<int> uniqueNodes;
 
 
@@ -37,9 +37,11 @@ public:
         return (int) uniqueNodes.size();
     };
 
-    void addEdge(int node1, int node2);
-    void addEdge(char node1, char node2);
-    unordered_set<int> neighboursForVertex(int node) {
+    void addEdge(int node1, int node2, int cost = 0);
+
+    void addEdge(char node1, char node2, int cost = 0);
+
+    unordered_map<int, int> neighboursForVertex(int node) {
         return edges[node];
     };
 };

@@ -3,3 +3,14 @@
 //
 
 #include "KruskalsAlgorithm.h"
+#include "../GraphClass/Graph.h"
+
+void kruskalsAlgorithm(Graph *graph) {
+
+}
+
+void testKruskalsAlgorithm() {
+    auto graph = new Graph();
+    graph->setupDAG();
+    kruskalsAlgorithm(graph);
+}

@@ -4,14 +4,14 @@
 
 #include "Graph.h"
 
-void Graph::addEdge(int from, int to) {
+void Graph::addEdge(int from, int to, int cost) {
     uniqueNodes.insert(from);
     uniqueNodes.insert(to);
-    this->edges[from].insert(to);
+    this->edges[from][to] = cost;
 }
 
-void Graph::addEdge(char from, char to) {
-    this->addEdge(from - 'a', to - 'a');
+void Graph::addEdge(char from, char to, int cost) {
+    this->addEdge(from - 'a', to - 'a', cost);
 }
 
 

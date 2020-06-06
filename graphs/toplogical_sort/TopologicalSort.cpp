@@ -13,8 +13,8 @@ using namespace std;
 
 int dfs(int currentOrderIndex, int currentNode, Graph graph, vector<int> &ordering, vector<bool> &seen) {
     seen[currentNode] = true;
-    unordered_set<int> nodes = graph.neighboursForVertex(currentNode);
-    for (auto node: nodes) {
+    unordered_map<int, int> nodes = graph.neighboursForVertex(currentNode);
+    for (auto &[node, cost]: nodes) {
         if (!seen[node]) {
             currentOrderIndex = dfs(currentOrderIndex, node, graph, ordering, seen);
         }
