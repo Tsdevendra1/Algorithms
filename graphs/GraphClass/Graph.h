@@ -26,10 +26,10 @@ using namespace std;
 
 class Graph {
 
-    unordered_set<int> uniqueNodes;
-
 
 public:
+    unordered_set<int> uniqueNodes;
+
     void setupDAG();
 
     unordered_map<int, unordered_map<int, int>> edges;
@@ -44,7 +44,7 @@ public:
 
     void addEdge(char node1, char node2, int cost = 0);
 
-    unordered_map<int, int> neighboursForVertex(int node) {
+    unordered_map<int, int> neighboursForVertex(int node){
         return edges[node];
     };
 };

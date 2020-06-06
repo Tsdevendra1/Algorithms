@@ -11,7 +11,7 @@
 
 using namespace std;
 
-int dfs(int currentOrderIndex, int currentNode, Graph graph, vector<int> &ordering, vector<bool> &seen) {
+int dfs(int currentOrderIndex, int currentNode, Graph &graph, vector<int> &ordering, vector<bool> &seen) {
     seen[currentNode] = true;
     unordered_map<int, int> nodes = graph.neighboursForVertex(currentNode);
     for (auto &[node, cost]: nodes) {
@@ -24,7 +24,7 @@ int dfs(int currentOrderIndex, int currentNode, Graph graph, vector<int> &orderi
 
 }
 
-vector<int> topologicalSort(const Graph &graph) {
+vector<int> topologicalSort(Graph &graph) {
     int numNodes = graph.numberOfNodes();
     vector<bool> seen(numNodes, false);
     vector<int> ordering(numNodes);
