@@ -103,6 +103,14 @@ vector<int> kasai(string &txt, vector<int> &suffixArr) {
     return lcp;
 }
 
+int getLongestRepeatedSubstring(string &txt) {
+    vector<int> suffixArray = buildSuffixArray(txt);
+    vector<int> lcpArray = kasai(txt, suffixArray);
+    // note that there could be multiple maxes so you should return them all
+    int maxLcpValue = *max_element(lcpArray.begin(), lcpArray.end());
+    return maxLcpValue;
+}
+
 void printArr(vector<int> &arr) {
     for (int i : arr)
         cout << i << " ";
@@ -117,4 +125,8 @@ void testSuffixArray() {
     vector<int> expectedLcpArray = {1, 3, 0, 0, 2, 0};
     assert(expectedLcpArray == lcpArray);
     printArr(lcpArray);
+
+    string repeatedString = "ABRACADABRA"; // answer should be 4 because ABRA is repeated twice
+    int longestRepeatedSubstringLength = getLongestRepeatedSubstring(repeatedString);
+    assert(longestRepeatedSubstringLength == 4);
 }
