@@ -24,11 +24,28 @@
 using namespace std;
 
 
+struct Edge {
+    int from;
+    int to;
+    int cost;
+};
+
 class Graph {
 
 
 public:
     unordered_set<int> uniqueNodes;
+
+    vector<Edge> getEdgesForGraph() {
+        vector<Edge> edgesForGraph;
+        for (auto &[node, neighbours]: this->edges) {
+            for (auto &[neighbour, cost]: neighbours) {
+                edgesForGraph.push_back(Edge{node, neighbour, cost});
+            }
+        }
+
+        return edgesForGraph;
+    }
 
     void setupDAG();
 
@@ -44,7 +61,7 @@ public:
 
     void addEdge(char node1, char node2, int cost = 0);
 
-    unordered_map<int, int> neighboursForVertex(int node){
+    unordered_map<int, int> neighboursForVertex(int node) {
         return edges[node];
     };
 };

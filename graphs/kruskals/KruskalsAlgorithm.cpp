@@ -8,20 +8,9 @@
 
 using namespace std;
 
-struct Edge {
-    int to;
-    int from;
-    int cost;
-};
 
 void kruskalsAlgorithm(Graph *graph) {
-    vector<Edge> edges;
-    for (const auto &[edge, neighbours]: graph->edges) {
-        for (const auto &[neighbour, cost]: neighbours) {
-            Edge newEdge = Edge{edge, neighbour, cost};
-            edges.push_back(newEdge);
-        }
-    }
+    vector<Edge> edges = graph->getEdgesForGraph();
 
     auto compareFunction = [](Edge first, Edge second) {
         return first.cost < second.cost;
@@ -38,7 +27,7 @@ void kruskalsAlgorithm(Graph *graph) {
         }
     }
 
-    for (auto edge: minSpanEdges){
+    for (auto edge: minSpanEdges) {
         cout << edge.to << "->" << edge.from << endl;
     }
 
