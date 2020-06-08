@@ -32,8 +32,10 @@ struct Edge {
 
 class Graph {
 
-
 public:
+    bool makeUndirected;
+
+    explicit Graph(bool makeUndirected = false) : makeUndirected(makeUndirected) {};
     unordered_set<int> uniqueNodes;
 
     vector<Edge> getEdgesForGraph() {

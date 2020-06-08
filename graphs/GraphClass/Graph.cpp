@@ -8,6 +8,9 @@ void Graph::addEdge(int from, int to, int cost) {
     uniqueNodes.insert(from);
     uniqueNodes.insert(to);
     this->edges[from][to] = cost;
+    if (makeUndirected) {
+        this->edges[to][from] = cost;
+    }
 }
 
 void Graph::addEdge(char from, char to, int cost) {
