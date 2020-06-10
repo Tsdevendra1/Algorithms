@@ -10,8 +10,6 @@ class BitwiseOperations {
 
 };
 
-void testBitwiseOperations(){
-
-}
+void testBitwiseOperations();
 
 #endif //ALGORITHMS_BITWISEOPERATIONS_H
