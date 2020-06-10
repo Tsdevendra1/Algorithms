@@ -14,9 +14,9 @@ class FenwickTree:
         2 -->   0000000000000010 (2s complement)
         -2 -->  1111111111111110 (2s complement)
 
-        if we do & --> 0000000000000010 --> which is binary form for 2 hence  2 & -2 == 2
+        if we do & --> 0000000000000010 --> which is bit_manipulation form for 2 hence  2 & -2 == 2
 
-        :return the index of the least significant bit of the val in binary form
+        :return the index of the least significant bit of the val in bit_manipulation form
         """
         return val & -val
 
