@@ -8,11 +8,17 @@
 
 using namespace std;
 
-string intToBinary(int number) {
+string intToBinary(int number, int numberOfBits=8) {
     string binary;
     while (number > 0) {
         binary += (number % 2 == 0) ? '0' : '1';
         number = number >> 1;
+    }
+    int leftToFill = numberOfBits - binary.size();
+    if (leftToFill > 0) {
+        for (int i=0; i < leftToFill; ++i) {
+            binary.insert(0,1, '0');
+        }
     }
     return binary;
 }
@@ -67,7 +73,6 @@ string twosComplementBinaryRepresentation(int number) {
     string flippedBinary = bitwiseNOT(numberInBinary);
     int flippedNumber = binaryToInt(flippedBinary);
     flippedNumber += 1;
-
     return intToBinary(flippedNumber);
 }
 
@@ -85,5 +90,5 @@ void testBitwiseOperations() {
     string test2 = "110";
     cout << binaryToInt(test) << endl;
     cout << bitwiseNOT(test2) << endl;
-//    cout << twosComplementBinaryRepresentation(1) << endl;
+    cout << twosComplementBinaryRepresentation(1) << endl;
 }
