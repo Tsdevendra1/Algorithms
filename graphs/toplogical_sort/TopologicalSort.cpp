@@ -37,7 +37,7 @@ vector<int> topologicalSort(Graph &graph) {
     int numNodes = graph.numberOfNodes();
     vector<bool> seen(numNodes, false);
     vector<int> ordering(numNodes);
-    vector<Colours> colours(numNodes);
+    vector<Colours> colours(numNodes, white);
     int indexForOrdering = numNodes - 1;
     bool hasCycle = false;
 
