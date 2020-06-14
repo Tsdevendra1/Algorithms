@@ -52,15 +52,57 @@ vector<int> topologicalSort(Graph &graph) {
     return ordering;
 }
 
+vector<int> topologicalSortWithWhile(Graph &graph) {
+    unordered_map<int, int> indegree;
+    for (int node : graph.uniqueNodes){
+        indegree[node];
+    }
+    for (auto &node:graph.uniqueNodes) {
+        for (auto &[neighbour, _]: graph.neighboursForVertex(node)) {
+            ++indegree[neighbour];
+        }
+    }
+    queue<int> nodesWithNoIncomingEdges;
+    for (auto &[node, degree]:indegree) {
+        if (degree == 0)
+            nodesWithNoIncomingEdges.push(node);
+    }
+    vector<int> topsort;
+    while (!nodesWithNoIncomingEdges.empty()) {
+        int current = nodesWithNoIncomingEdges.front();
+        nodesWithNoIncomingEdges.pop();
+        topsort.push_back(current);
+        for (auto &[node, _]: graph.neighboursForVertex(current)) {
+            --indegree[node];
+            if (indegree[node] == 0) {
+                nodesWithNoIncomingEdges.push(node);
+            }
+        }
+    }
+    if (topsort.size() != graph.numberOfNodes())
+        throw logic_error("detected cycle");
+    return topsort;
+
+
+}
+
 
 void testTopologicalSort() {
     auto graph = new Graph();
     graph->setupDAG();
 
     vector<int> sorted = topologicalSort(*graph);
+    vector<int> sorted1 = topologicalSortWithWhile(*graph);
     for (auto node: sorted) {
         string letter;
         letter += node + 'a';
-        cout << letter << endl;
+        cout << letter << " ";
     }
+    cout << endl;
+    for (auto node: sorted1) {
+        string letter;
+        letter += node + 'a';
+        cout << letter << " ";
+    }
+    cout << endl;
 }
