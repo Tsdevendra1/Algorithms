@@ -15,7 +15,7 @@ class Utils {
 public:
     template<typename T>
     static void printArr(vector<T> arr) {
-        for (int i : arr)
+        for (auto i : arr)
             cout << i << " ";
         cout << endl;
     }
