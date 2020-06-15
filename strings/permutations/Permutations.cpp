@@ -34,8 +34,21 @@ vector<string> getPerms(vector<char> &choices) {
     return wrapper->perms;
 }
 
+vector<string> getPermsForLoop(vector<char> &choices) {
+    vector<string> perms = {""};
+    for (auto choice:choices) {
+        int size = perms.size();
+        for (int i=0; i<size; ++i) {
+            perms.push_back(choice + perms[i]);
+        }
+    }
+    return perms;
+}
+
 void testPermutations() {
     vector<char> possibilities = {'a', 'b', 'c'};
     vector<string> perms = getPerms(possibilities);
+    vector<string> perms1 = getPermsForLoop(possibilities);
     Utils::printArr(perms);
+    Utils::printArr(perms1);
 }
