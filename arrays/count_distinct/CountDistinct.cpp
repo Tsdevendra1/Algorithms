@@ -28,6 +28,7 @@ int countDistinctWithoutHashing(vector<int> &array) {
 }
 
 int countDistinctWithSorting(vector<int> &array) {
+    // this method is nlogn
     sort(array.begin(), array.end());
     int result = 0;
     for (int i = 0; i < array.size(); ++i) {
@@ -40,6 +41,7 @@ int countDistinctWithSorting(vector<int> &array) {
 }
 
 int countDistinct(vector<int> &array) {
+    // this method is n
     unordered_set<int> uniqueNumbers;
     for (int value:array) {
         uniqueNumbers.insert(value);
