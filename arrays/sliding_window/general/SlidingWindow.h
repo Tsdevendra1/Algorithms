@@ -6,10 +6,7 @@
 #define ALGORITHMS_SLIDINGWINDOW_H
 
 
-class SlidingWindow {
-
-};
-
 
 void testSlidingWindow();
+
 #endif //ALGORITHMS_SLIDINGWINDOW_H
