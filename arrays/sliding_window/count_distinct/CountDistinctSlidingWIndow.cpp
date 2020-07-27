@@ -34,11 +34,12 @@ vector<int> countDistinctSlidingWithoutHashing(vector<int> &array, int windowSiz
 
 void countDistinctSlidingWithSorting(vector<int> &array, int windowSize) {
     // this is same as previous but using the sorted version for the sub arrays
-    // n*klogk
+    // n*klogk (k=windowsize)
 
 }
 
 vector<int> countDistinctSlidingWithHash(vector<int> &array, int windowSize) {
+    // this is n * k time complexity (k=windowsize)
     vector<int> numDistinctForEachWindow;
     for (int windowStart = 0; windowStart <= array.size() - windowSize; ++windowStart) {
         unordered_set<int> unique;
