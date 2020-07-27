@@ -6,7 +6,7 @@
 #define ALGORITHMS_COUNTDISTINCTSLIDINGWINDOW_H
 
 
-void testCountDistinctSlidingWindowNaive();
+void testCountDistinctSlidingWindow();
 
 
 #endif //ALGORITHMS_COUNTDISTINCTSLIDINGWINDOW_H
