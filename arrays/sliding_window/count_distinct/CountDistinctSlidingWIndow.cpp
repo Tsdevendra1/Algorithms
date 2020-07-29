@@ -117,6 +117,7 @@ vector<int> countDistinctOptimalDifferentApproach(vector<int> &array, int window
 }
 
 void testCountDistinctSlidingWindow() {
+    // look at atmost k distinct as well, that gives best solution for varying sizes;
     vector<int> numbers = {1, 2, 3, 4, 5, 5, 6};
     vector<int> expected = {3, 3, 3, 2, 2};
     assert(countDistinctSlidingWithoutHashing(numbers, 3) == expected);

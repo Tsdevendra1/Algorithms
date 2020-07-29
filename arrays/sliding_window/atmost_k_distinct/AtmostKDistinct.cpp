@@ -20,7 +20,7 @@ int numSubArraysDistinctUpToK(vector<int> &array, int windowSize) {
         ++inCurrentWindow[array[right]];
 
         // need to decrease the window if num of distinct elements is too much
-        while (inCurrentWindow.size() > windowSize){
+        while (left < right && inCurrentWindow.size() > windowSize){
             int value = array[left];
             --inCurrentWindow[value];
             if (inCurrentWindow[value] == 0) {
