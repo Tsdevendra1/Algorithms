@@ -31,8 +31,12 @@ public:
             int newRight = (y - 1);
             int newLeft = (x + 1);
             int sizeAfterRemovingCharacters = newRight - newLeft + 1;
-            // this makes sense because if the value (which represents the longest palindromic sub string
+            // this is to check that the substring when we remove x and y is also a palindrome
             if (val >= sizeAfterRemovingCharacters) {
+                // this will only be greater than only when x == y which is why the above if statement is using >= instead of just ==
+                if (val > sizeAfterRemovingCharacters){
+                    cout << x << " " << y << endl;
+                }
                 int addScore = (x == y) ? 1 : 2;
                 ret = val + addScore;
                 if (ret > currentMax) {
