@@ -3,19 +3,19 @@
 //
 
 #include <iostream>
-#include "LongestCommonSub.h"
+#include "LongestCommonSubString.h"
 #include "string"
 #include "vector"
 
 using namespace std;
 
-class LongestCommonSub {
+class LongestCommonSubString {
     string txt1;
     string txt2;
     vector<vector<int>> dp;
 public:
-    LongestCommonSub(string &txt1, string &txt2) : txt1(txt1), txt2(txt2),
-                                                   dp(txt1.size(), vector<int>(txt2.size(), 0)) {}
+    LongestCommonSubString(string &txt1, string &txt2) : txt1(txt1), txt2(txt2),
+                                                         dp(txt1.size(), vector<int>(txt2.size(), 0)) {}
 
     int topDown(int i, int j) {
         if (i >= txt1.size() || j >= txt2.size()) {
@@ -59,11 +59,11 @@ public:
 };
 
 
-void testLongestCommonSub() {
+void testLongestCommonSubString() {
     string txt1 = "AGGTAB";
     string txt2 = "GXTXAYB";
-    auto solution = make_unique<LongestCommonSub>(txt1, txt2);
+    auto solution = make_unique<LongestCommonSubString>(txt1, txt2);
     assert(solution->topDown(0, 0) == 4);
-    auto solution1 = make_unique<LongestCommonSub>(txt1, txt2);
+    auto solution1 = make_unique<LongestCommonSubString>(txt1, txt2);
     assert(solution1->bottomUp() == 4);
 }
