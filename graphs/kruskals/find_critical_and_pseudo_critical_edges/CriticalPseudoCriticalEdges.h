@@ -1,0 +1,12 @@
+//
+// Created by Tharuka Devendra on 03/08/2020.
+//
+
+#ifndef ALGORITHMS_CRITICALPSEUDOCRITICALEDGES_H
+#define ALGORITHMS_CRITICALPSEUDOCRITICALEDGES_H
+
+
+void testCriticalPseudoCriticalEdges();
+
+
+#endif //ALGORITHMS_CRITICALPSEUDOCRITICALEDGES_H
