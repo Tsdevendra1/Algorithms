@@ -1,0 +1,14 @@
+//
+// Created by Tharuka Devendra on 03/08/2020.
+//
+
+#ifndef ALGORITHMS_LONGESTCOMMONSUBSTRING_H
+#define ALGORITHMS_LONGESTCOMMONSUBSTRING_H
+
+
+
+
+void testLongestCommonSubString();
+
+
+#endif //ALGORITHMS_LONGESTCOMMONSUBSTRING_H

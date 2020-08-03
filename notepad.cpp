@@ -7,5 +7,4 @@
 using namespace std;
 
 void notepad(){
-    cout << "hi";
 }
