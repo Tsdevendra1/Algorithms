@@ -2,3 +2,5 @@
 cmake-build-debug
 main.cpp
 main.py
+notepad.h
+notepad.cpp
