@@ -16,7 +16,7 @@ public:
 
     explicit Wrapper(int arrSize, vector<char> &choices) : arrSize(arrSize), choices(choices) {};
 
-    void createPerms(string current, int index) {
+    void createPerms(const string &current, int index) {
         perms.push_back(current);
 
         if (index >= arrSize) {

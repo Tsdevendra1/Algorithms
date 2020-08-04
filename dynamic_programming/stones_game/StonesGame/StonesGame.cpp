@@ -9,7 +9,7 @@
 
 using namespace std;
 
-class Solution {
+class StonesGameSolution {
 public:
     vector<int> stones;
     vector<vector<int>> dp;
@@ -52,7 +52,7 @@ public:
 
 
 void testStoneGame(){
-    auto solution = make_unique<Solution>();
+    auto solution = make_unique<StonesGameSolution>();
     vector<int> stones = {5,3,4,5,3};
     cout << solution->canWinStoneGame(stones)<<endl;
 }
