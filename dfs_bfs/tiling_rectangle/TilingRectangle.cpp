@@ -11,6 +11,8 @@
 #include "numeric"
 #include "map"
 #include "algorithm"
+#include "unordered_map"
+#include "queue"
 
 using namespace std;
 
@@ -62,12 +64,11 @@ public:
         // start with best possible solution
         for (int blockSize = maxBlockUsable;
              blockSize >= 1; --blockSize) {
-            if (!isAvailable(currentRow, currentCol, blockSize)) {
-                break;
+            if (isAvailable(currentRow, currentCol, blockSize)) {
+                coverGrid(currentRow, currentCol, blockSize);
+                dfs(currentRow, currentCol + 1, numBlocksUsed + 1);
+                uncoverGrid(currentRow, currentCol, blockSize);
             }
-            coverGrid(currentRow, currentCol, blockSize);
-            dfs(currentRow, currentCol + 1, numBlocksUsed + 1);
-            uncoverGrid(currentRow, currentCol, blockSize);
         }
 
     }
@@ -88,10 +89,97 @@ public:
         this->cols = colsCopy;
         grid.resize(rows, vector<bool>(cols, false));
         dfs(0, 0, 0);
-        cout << currentBest << endl;
         return currentBest;
     }
+
 };
+
+int numberOfSquaresToFillBFS(int rows, int cols) {
+
+    auto isComplete = [](vector<vector<bool>> &grid) {
+        int numRows = grid.size();
+        int numCols = grid[0].size();
+        for (int row = 0; row < numRows; ++row) {
+            for (int col = 0; col < numCols; ++col) {
+                if (!grid[row][col]) {
+                    return false;
+                }
+            }
+        }
+        return true;
+    };
+
+    auto cover = [](vector<vector<bool>> &grid, bool shouldCover, int row, int col, int blockSize) {
+        for (int i = 0; i < blockSize; ++i) {
+            for (int j = 0; j < blockSize; ++j) {
+                grid[row + i][col + j] = shouldCover;
+            }
+        }
+    };
+
+    auto canCover = [](vector<vector<bool>> &grid, int row, int col, int blockSize) {
+        for (int i = 0; i < blockSize; ++i) {
+            for (int j = 0; j < blockSize; ++j) {
+                if (grid[row + i][col + j]) {
+                    return false;
+                }
+            }
+        }
+        return true;
+    };
+
+    vector<vector<bool>> startGrid(rows, vector<bool>(cols, false));
+    queue<tuple<int, vector<vector<bool>>, vector<int>>> tracker;
+    int answer = INT_MAX;
+    tracker.push({0, startGrid, {}});
+
+    while (!tracker.empty()) {
+        auto currentTop = tracker.front();
+        int numberOfSquaresUsed = get<0>(currentTop);
+        auto grid = get<1>(currentTop);
+        auto history = get<2>(currentTop);
+        tracker.pop();
+
+        if (isComplete(grid)) {
+            return numberOfSquaresUsed;
+        }
+
+        int unfilledCol;
+        int unfilledRow;
+        bool foundUnfilled = false;
+
+        for (int row = 0; row < rows; ++row) {
+            for (int col = 0; col < cols; ++col) {
+                if (!grid[row][col]) {
+                    unfilledRow = row;
+                    unfilledCol = col;
+                    foundUnfilled = true;
+                    break;
+                }
+            }
+            if (foundUnfilled)
+                break;
+        }
+
+        int maxBlockSize = min(rows - unfilledRow, cols - unfilledCol);
+
+        for (int blockSize = maxBlockSize; blockSize >= 1; --blockSize) {
+
+            if (!canCover(grid, unfilledRow, unfilledCol, blockSize)) {
+                continue;
+            }
+
+            cover(grid, true, unfilledRow, unfilledCol, blockSize);
+            history.push_back(blockSize);
+
+            tracker.push({numberOfSquaresUsed + 1, grid, history});
+
+            cover(grid, false, unfilledRow, unfilledCol, blockSize);
+            history.pop_back();
+        }
+    }
+    return answer;
+}
 
 void testTilingRectangle() {
     int rows = 5;
@@ -99,4 +187,7 @@ void testTilingRectangle() {
     auto solution = new TileRectangle();
     assert(solution->numberOfSquaresToFill(rows, cols) == 5);
     assert(solution->numberOfSquaresToFill(2, 3) == 3);
+    assert(numberOfSquaresToFillBFS(11, 13) == 6);
+    assert(numberOfSquaresToFillBFS(5, 8) == 5);
+    assert(numberOfSquaresToFillBFS(2, 3) == 3);
 }
