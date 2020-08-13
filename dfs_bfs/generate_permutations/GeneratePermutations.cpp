@@ -86,9 +86,9 @@ void testGeneratePermutations() {
     auto answer2 = perms->findPermutations(choices);
 
     int similar = 0;
-    for (auto &a1: answer){
+    for (auto &a1: answer) {
         for (auto &a2: answer2) {
-            if (a1 == a2){
+            if (a1 == a2) {
                 ++similar;
             }
         }
