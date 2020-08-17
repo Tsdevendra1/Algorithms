@@ -99,11 +99,46 @@ vector<vector<int>> perms3(vector<int> &choices) {
     return answer;
 }
 
+bool perms3UniquePermutationShouldSwap(vector<int> &choices, int swapPosition, int toSwapWithPosition) {
+    for (int i = swapPosition; i < toSwapWithPosition; ++i) {
+        if (choices[toSwapWithPosition] == choices[i]) {
+            return false;
+        }
+    }
+    return true;
+}
+
+void perms3HelperUniquePermutations(int swapPosition, vector<int> &choices, vector<vector<int>> &answer) {
+    if (swapPosition == choices.size() - 1) {
+        answer.push_back(choices);
+    } else {
+        for (int toSwapWith = swapPosition; toSwapWith < choices.size(); ++toSwapWith) {
+            bool shouldSwap = perms3UniquePermutationShouldSwap(choices, swapPosition, toSwapWith);
+            if (shouldSwap) {
+                swap(choices[swapPosition], choices[toSwapWith]);
+                perms3HelperUniquePermutations(swapPosition + 1, choices, answer);
+                swap(choices[swapPosition], choices[toSwapWith]);
+            }
+        }
+    }
+}
+
+vector<vector<int>> perms3UniquePermutations(vector<int> &choices) {
+    vector<vector<int>> answer;
+    perms3HelperUniquePermutations(0, choices, answer);
+    return answer;
+}
+
+
 void testGeneratePermutations() {
-    vector<int> choices = {1, 2, 2};
+    vector<int> choices = {1, 2, 3};
     auto answer = perms2(choices);
     auto answer2 = perms1(choices);
     auto answer3 = perms3(choices);
+
+    vector<int> choicesWithDuplicates = {1, 2, 3, 1};
+    auto answer4 = perms3UniquePermutations(choicesWithDuplicates);
+    assert(answer4.size() == 12);
 
     int similar = 0;
     for (auto &a1: answer) {
