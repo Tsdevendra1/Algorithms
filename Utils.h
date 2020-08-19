@@ -19,6 +19,25 @@ public:
             cout << i << " ";
         cout << endl;
     }
+
+    template<typename T>
+    static bool compareVectors(vector<T> &arr1, vector<T> &arr2) {
+        if (arr1.size() != arr2.size()){
+            return false;
+        }
+        for (auto a1: arr1) {
+            bool found = false;
+            for (auto a2: arr2) {
+                if (a1 == a2) {
+                    found = true;
+                }
+            }
+            if (!found) {
+                return false;
+            }
+        }
+        return true;
+    }
 };
 
 

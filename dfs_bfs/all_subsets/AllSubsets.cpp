@@ -7,12 +7,33 @@
 #include "vector"
 #include "numeric"
 #include "queue"
+#include "../../Utils.h"
 
 using namespace std;
 
 int numberOfSubsets(vector<int> &choices) {
     int n = choices.size();
     return pow(2, n);
+}
+
+void backtrack(vector<int> &current, int currentPosition, vector<int> &choices, vector<vector<int>> &answers){
+    if (currentPosition >= choices.size()){
+        answers.push_back(current);
+        return;
+    }
+    backtrack(current, currentPosition + 1, choices, answers);
+    int valueForPosition = choices[currentPosition];
+    current.push_back(valueForPosition);
+    backtrack(current, currentPosition + 1, choices, answers);
+    current.pop_back();
+
+}
+
+vector<vector<int>> getAllSubsetsBacktrack(vector<int> &choices){
+    vector<vector<int>> answer;
+    vector<int> random = {};
+    backtrack(random, 0,choices, answer);
+    return answer;
 }
 
 vector<vector<int>> getAllSubsets(vector<int> &choices) {
@@ -42,5 +63,9 @@ void testAllSubsets() {
 // do memo, stack with queue
     assert(numberOfSubsets(test) == 8);
     auto subsets = getAllSubsets(test);
+    auto subsetsBacktrack = getAllSubsetsBacktrack(test);
     assert(subsets.size() == 8);
+    assert(subsetsBacktrack.size() == 8);
+    assert(Utils::compareVectors(subsets, subsetsBacktrack));
+
 }
