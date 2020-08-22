@@ -1,0 +1,13 @@
+//
+// Created by Tharuka Devendra on 22/08/2020.
+//
+
+#ifndef ALGORITHMS_DFSRECURSIVEFORALLPATHS_H
+#define ALGORITHMS_DFSRECURSIVEFORALLPATHS_H
+
+
+
+void testDfsRecursiveForAllPaths();
+
+
+#endif //ALGORITHMS_DFSRECURSIVEFORALLPATHS_H
