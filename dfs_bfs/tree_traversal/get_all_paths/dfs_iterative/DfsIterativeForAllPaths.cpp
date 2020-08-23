@@ -68,7 +68,8 @@ vector<vector<int>> dfsIterativeForAllPathsMemoryEfficient(vector<vector<int>> &
         }
 
 
-        if (currentPath.size() == 1) {
+        // currentNode 0 (start node) si the only node without parents so just continue
+        if (currentNode == 0) {
             continue;
         }
         int previousParent = currentPath[currentPath.size() - 2];
