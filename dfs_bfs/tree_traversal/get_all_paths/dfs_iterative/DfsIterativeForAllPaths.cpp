@@ -129,6 +129,7 @@ void testDfsIterativeForAllPaths() {
     auto allPaths = dfsIterativeForAllPaths(adjacencyList, 3);
     auto allPaths2 = dfsIterativeForAllPathsMemoryEfficient(adjacencyList, 3);
     auto allPaths3 = dfsIterativeForAllPathsMemoryEfficient2(adjacencyList);
+    // https://leetcode.com/problems/all-paths-from-source-to-target/discuss/119089/JAVA-Iterative-O(N)-DFS-with-1-stack (another memory efficient way)
     assert(Utils::compareVectors(allPaths, allPaths2));
     assert(Utils::compareVectors(allPaths3, allPaths2));
     assert(allPaths.size() == 3);
