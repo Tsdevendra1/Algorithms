@@ -8,6 +8,40 @@
 
 using namespace std;
 
+int numberOfCoinsDfs(int currentTotal, vector<int> &coins, int amount, vector<int> &dp) {
+    if (currentTotal == 0) {
+        return 0;
+    }
+
+    if (currentTotal < 0) {
+        return INT_MAX;
+    }
+
+    if (dp[currentTotal]) {
+        return dp[currentTotal];
+    }
+
+    int numCoins = INT_MAX;
+    for (int coin: coins) {
+        int numberOfCoinsForPreviousTotal = numberOfCoinsDfs(currentTotal - coin, coins, amount, dp);
+        if (numberOfCoinsForPreviousTotal != INT_MAX) {
+            numCoins = min(numCoins, numberOfCoinsForPreviousTotal + 1);
+        }
+    }
+    dp[currentTotal] = numCoins;
+    return dp[currentTotal];
+}
+
+int numberOfCoinsTopDown(vector<int> &coins, int amount) {
+    vector<int> dp(amount + 1, 0);
+    for (int coin: coins) {
+        if (coin < dp.size()) {
+            dp[coin] = 1;
+        }
+    }
+    int answer = numberOfCoinsDfs(amount, coins, amount, dp);
+    return answer == INT_MAX ? -1 : answer;
+}
 
 int numberOfCoinsBottomUp(vector<int> &coins, int amount) {
     vector<int> dp(amount + 1, INT_MAX);
@@ -15,7 +49,7 @@ int numberOfCoinsBottomUp(vector<int> &coins, int amount) {
     dp[0] = 0;
     for (int coin: coins) {
         if (coin < dp.size()) {
-            dp[coin] = coin;
+            dp[coin] = 1;
         }
     }
 
@@ -33,6 +67,7 @@ int numberOfCoinsBottomUp(vector<int> &coins, int amount) {
 
 void testCoinChange() {
     vector<int> coins = {1, 2, 5};
-    int amount = 1;
+    int amount = 11;
     assert(numberOfCoinsBottomUp(coins, amount) == 3);
+    assert(numberOfCoinsTopDown(coins, amount) == 3);
 }
