@@ -1,0 +1,11 @@
+//
+// Created by Tharuka Devendra on 07/09/2020.
+//
+
+#ifndef ALGORITHMS_NUMBEROFPATHSFORGRID_H
+#define ALGORITHMS_NUMBEROFPATHSFORGRID_H
+
+
+void testNumberOfPathsForGrid();
+
+#endif //ALGORITHMS_NUMBEROFPATHSFORGRID_H
