@@ -1,0 +1,12 @@
+//
+// Created by Tharuka Devendra on 08/09/2020.
+//
+
+#ifndef ALGORITHMS_GREEDYLONGESTCHUNKEDPALINDROME_H
+#define ALGORITHMS_GREEDYLONGESTCHUNKEDPALINDROME_H
+
+
+void testGreedyLongestChunkedPalindrome();
+
+
+#endif //ALGORITHMS_GREEDYLONGESTCHUNKEDPALINDROME_H
