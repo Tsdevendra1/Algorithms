@@ -55,7 +55,6 @@ vector<vector<int>> getAllSubArraysTopDownExpanding(vector<int> &array) {
 }
 
 vector<vector<int>> getAllSubArrays(vector<int> &array) {
-
     vector<vector<int>> answer;
     // the first two outer for loops gives the combos of the start and end of different size sub arrays
     for (int subArraySize = 1; subArraySize <= array.size(); ++subArraySize) {
@@ -66,7 +65,6 @@ vector<vector<int>> getAllSubArrays(vector<int> &array) {
         }
     }
     return answer;
-
 }
 
 void testAllSubArrays() {
