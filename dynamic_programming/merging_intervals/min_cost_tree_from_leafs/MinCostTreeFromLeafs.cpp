@@ -8,12 +8,53 @@
 
 using namespace std;
 
-int getMinCostFromLeafs(vector<int> &leafValues) {
+// function returns
+int memo(int subArrayStart, int subArrayEnd, vector<int> &leafValues, vector<vector<int>> &maxForRange,
+         vector<vector<int>> &dp) {
+
+    int currentSize = (subArrayEnd - subArrayStart) + 1;
+    if (currentSize < 2) {
+        return 0;
+    }
+
+    if (dp[subArrayStart][subArrayEnd]) {
+        return dp[subArrayStart][subArrayEnd];
+    }
+
+
+    int answer = INT_MAX;
+    for (int splittingPoint = subArrayStart; splittingPoint < subArrayEnd; ++splittingPoint) {
+        int lowestLeft = memo(subArrayStart, splittingPoint, leafValues, maxForRange, dp);
+        int lowestRight = memo(splittingPoint+1, subArrayEnd, leafValues, maxForRange, dp);
+        int product = maxForRange[subArrayStart][splittingPoint] * maxForRange[splittingPoint + 1][subArrayEnd];
+        int current = lowestLeft + lowestRight + product;
+        answer = min(answer, current);
+    }
+
+    dp[subArrayStart][subArrayEnd] = answer;
+    return answer;
+}
+
+int getMinCostFromLeafsTopDown(vector<int> &leafValues) {
+    vector<vector<int>> maxForIndexRange(leafValues.size(), vector<int>(leafValues.size()));
+    vector<vector<int>> dp(leafValues.size(), vector<int>(leafValues.size(), 0));
+    for (int subArrayStart = 0; subArrayStart < leafValues.size(); ++subArrayStart) {
+        int maxFound = INT_MIN;
+        for (int subArrayEnd = subArrayStart; subArrayEnd < leafValues.size(); ++subArrayEnd) {
+            int newestValue = leafValues[subArrayEnd];
+            maxFound = max(maxFound, newestValue);
+            maxForIndexRange[subArrayStart][subArrayEnd] = maxFound;
+        }
+    }
+
+    return memo(0, leafValues.size()-1, leafValues, maxForIndexRange, dp);
+}
+
+int getMinCostFromLeafsBottomUp(vector<int> &leafValues) {
     // inclusive
     vector<vector<int>> maxForIndexRange(leafValues.size(), vector<int>(leafValues.size()));
-    vector<vector<int>> dp(leafValues.size(), vector<int>(leafValues.size()));
+    vector<vector<int>> dp(leafValues.size(), vector<int>(leafValues.size(), 0));
 
-    int answer = 0;
     for (int subArrayStart = 0; subArrayStart < leafValues.size(); ++subArrayStart) {
         int maxFound = INT_MIN;
         for (int subArrayEnd = subArrayStart; subArrayEnd < leafValues.size(); ++subArrayEnd) {
@@ -44,5 +85,6 @@ int getMinCostFromLeafs(vector<int> &leafValues) {
 void testMinCostTreeFromLeafs() {
     // https://leetcode.com/problems/minimum-cost-tree-from-leaf-values/submissions/
     vector<int> leafValues = {6, 2, 4};
-    assert(getMinCostFromLeafs(leafValues) == 32);
+    assert(getMinCostFromLeafsBottomUp(leafValues) == 32);
+    assert(getMinCostFromLeafsTopDown(leafValues) == 32);
 };
