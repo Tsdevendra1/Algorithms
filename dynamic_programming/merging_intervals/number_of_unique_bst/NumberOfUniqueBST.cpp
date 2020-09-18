@@ -39,7 +39,9 @@ int getNumberOfUniqueBSTBottomUp(int n) {
     dp[1] = 1;
     for (int subArraySize = 2; subArraySize <= n; ++subArraySize) {
         for (int parent = 1; parent <= subArraySize; ++parent) {
-            dp[subArraySize-1] += dp[parent - 1] * dp[subArraySize - 1];
+            int left = dp[parent-1];
+            int right = dp[subArraySize-parent];
+            dp[subArraySize-1] += left * right;
         }
     }
     return dp.back();
