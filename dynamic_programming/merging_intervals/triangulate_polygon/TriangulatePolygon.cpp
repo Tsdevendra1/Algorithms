@@ -16,18 +16,22 @@ int getMinScoreToTriangulate(vector<int> &scoresForVertex) {
         for (int subArrayStart = 0; subArrayStart <= n - subArraySize; ++subArrayStart) {
             int subArrayEnd = (subArrayStart + subArraySize) - 1;
             dp[subArrayStart][subArrayEnd] = INT_MAX;
-            for (int splittingPoint = subArrayStart; splittingPoint < subArrayEnd; ++splittingPoint) {
+            for (int splittingPoint = subArrayStart + 1; splittingPoint < subArrayEnd; ++splittingPoint) {
+
                 int product =
-                        scoresForVertex[subArrayStart] * scoresForVertex[splittingPoint] * scoresForVertex[subArrayEnd];
-                int current = dp[subArrayStart][splittingPoint] + dp[splittingPoint + 1][subArrayEnd] + product;
+                        scoresForVertex[subArrayStart] *
+                        scoresForVertex[splittingPoint] *
+                        scoresForVertex[subArrayEnd];
+
+                int current = dp[subArrayStart][splittingPoint] + dp[splittingPoint][subArrayEnd] + product;
                 int previous = dp[subArrayStart][subArrayEnd];
+
                 dp[subArrayStart][subArrayEnd] = min(current, previous);
+
             }
         }
     }
-    int answer= dp[0].back();
-    cout << answer << endl;
-    return answer;
+    return dp[0].back();
 }
 
 void testTriangulatePolygon() {
