@@ -9,7 +9,7 @@
 using namespace std;
 
 
-int getMinScoreToTriangulate(vector<int> &scoresForVertex) {
+int getMinScoreToTriangulateBottomUp(vector<int> &scoresForVertex) {
     int n = scoresForVertex.size();
     vector<vector<int>> dp(n, vector<int>(n));
     for (int subArraySize = 3; subArraySize <= n; ++subArraySize) {
@@ -36,5 +36,5 @@ int getMinScoreToTriangulate(vector<int> &scoresForVertex) {
 
 void testTriangulatePolygon() {
     vector<int> test = {3, 7, 4, 5};
-    assert(getMinScoreToTriangulate(test) == 144);
+    assert(getMinScoreToTriangulateBottomUp(test) == 144);
 }
