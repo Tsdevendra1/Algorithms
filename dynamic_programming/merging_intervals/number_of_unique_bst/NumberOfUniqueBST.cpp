@@ -34,20 +34,20 @@ int getNumberOfUniqueBSTTopDown(int n) {
 }
 
 int getNumberOfUniqueBSTBottomUp(int n) {
-    vector<int> dp(n);
+    vector<int> dp(n+1);
     dp[0] = 1;
     dp[1] = 1;
     for (int subArraySize = 2; subArraySize <= n; ++subArraySize) {
         for (int parent = 1; parent <= subArraySize; ++parent) {
             int left = dp[parent-1];
             int right = dp[subArraySize-parent];
-            dp[subArraySize-1] += left * right;
+            dp[subArraySize] += (left * right);
         }
     }
     return dp.back();
 }
 
 void testNumberOfUniqueBST() {
-    assert(getNumberOfUniqueBSTTopDown(3) == 14);
-    assert(getNumberOfUniqueBSTBottomUp(3) == 14);
+    assert(getNumberOfUniqueBSTTopDown(4) == 14);
+    assert(getNumberOfUniqueBSTBottomUp(4) == 14);
 }
