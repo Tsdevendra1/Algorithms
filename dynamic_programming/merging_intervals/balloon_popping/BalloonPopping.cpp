@@ -8,57 +8,43 @@
 
 using namespace std;
 
-int tempAnswer(vector<int> &nums) {
+int memo(int leftSideBalloon, int rightSideBalloon, vector<int> &balloons, vector<vector<int>> &dp) {
 
-    int N = nums.size();
-    nums.insert(nums.begin(), 1);
-    nums.insert(nums.end(), 1);
-
-    // rangeValues[i][j] is the maximum # of coins that can be obtained
-    // by popping balloons only in the range [i,j]
-    vector<vector<int>> rangeValues(nums.size(), vector<int>(nums.size(), 0));
-
-    // build up from shorter ranges to longer ranges
-    for (int len = 1; len <= N; ++len) {
-        for (int start = 1; start <= N - len + 1; ++start) {
-            int end = start + len - 1;
-            // calculate the max # of coins that can be obtained by
-            // popping balloons only in the range [start,end].
-            // consider all possible choices of final balloon to pop
-            int bestCoins = 0;
-            for (int final = start; final <= end; ++final) {
-                int leftSide = rangeValues[start][final - 1];
-                int rightSide = rangeValues[final + 1][end];
-                int costForCurrent = nums[start - 1] * nums[final] * nums[end + 1];
-                int coins = leftSide + rightSide + costForCurrent;
-                if (coins > bestCoins) {
-                    bestCoins = coins;
-                }
-            }
-            rangeValues[start][end] = bestCoins;
-        }
+    if (rightSideBalloon - leftSideBalloon == 1) {
+        return 0;
     }
-    return rangeValues[1][N];
 
+    if (rightSideBalloon < leftSideBalloon) {
+        return 0;
+    }
+
+    int cachedValue = dp[leftSideBalloon][rightSideBalloon];
+    if (cachedValue != 0) {
+        return cachedValue;
+    }
+
+    int answer = INT_MIN;
+    for (int chosenBalloon = leftSideBalloon + 1; chosenBalloon < rightSideBalloon; ++chosenBalloon) {
+        int maxScoreToRemoveLeft = memo(leftSideBalloon, chosenBalloon, balloons, dp);
+        int maxScoreToRemoveRight = memo(chosenBalloon, rightSideBalloon, balloons, dp);
+        int scoreForCurrent = balloons[leftSideBalloon] * balloons[chosenBalloon] * balloons[rightSideBalloon];
+        int score = scoreForCurrent + maxScoreToRemoveLeft + maxScoreToRemoveRight;
+        answer = max(answer, score);
+    }
+
+    dp[leftSideBalloon][rightSideBalloon] = answer;
+    return answer;
 }
 
 int getScoreForPoppingBalloons(vector<int> &balloons) {
-    int n = balloons.size();
-    vector<vector<int>> dp(n + 2, vector<int>(n + 2));
-
-    for (int subArraySize = 1; subArraySize <= n; ++subArraySize) {
-        for (int subArrayStart = 0; subArrayStart <= n - subArraySize; ++subArrayStart) {
-            int subArrayEnd = subArrayStart + subArraySize - 1;
-            for (int splitPoint = subArrayStart; splitPoint < subArrayEnd; ++splitPoint) {
-
-            }
-        }
-    }
-
-    return dp[0].back();
+    balloons.insert(balloons.begin(), 1);
+    balloons.insert(balloons.end(), 1);
+    vector<vector<int>> dp(balloons.size(), vector<int>(balloons.size(), 0));
+    int answer = memo(0, (int) balloons.size() - 1, balloons, dp);
+    return answer;
 }
 
 void testBalloonPopping() {
-    vector<int> test = {3, 1, 5, 8};
-    cout << tempAnswer(test) << endl;
+    vector<int> test = {3, 5, 8};
+    assert( getScoreForPoppingBalloons(test) == 152);
 }
