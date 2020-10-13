@@ -44,7 +44,7 @@ public:
         dp.resize(txt1.size()+1, vector<int>(txt2.size()+1, 0));
 
         for (int i = 1; i <= txt1.size(); ++i) {
-            int score = 0;
+            int score;
             for (int j = 1; j <= txt2.size(); ++j) {
                 if (txt1[i-1] == txt2[j-1]) {
                     score = dp[i-1][j-1] + 1;
