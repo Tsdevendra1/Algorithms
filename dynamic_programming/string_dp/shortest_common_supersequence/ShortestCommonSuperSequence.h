@@ -1,0 +1,12 @@
+//
+// Created by Tharuka Devendra on 13/10/2020.
+//
+
+#ifndef ALGORITHMS_SHORTESTCOMMONSUPERSEQUENCE_H
+#define ALGORITHMS_SHORTESTCOMMONSUPERSEQUENCE_H
+
+
+void testShortestCommonSuperSequence();
+
+
+#endif //ALGORITHMS_SHORTESTCOMMONSUPERSEQUENCE_H
