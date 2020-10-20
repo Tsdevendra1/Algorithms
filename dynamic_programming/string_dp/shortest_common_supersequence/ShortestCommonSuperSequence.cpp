@@ -6,6 +6,7 @@
 #include "string"
 #include "vector"
 #include "iostream"
+#include "../get_longest_subsequence_letters/LongestCommonSequenceString.h"
 
 using namespace std;
 
@@ -76,9 +77,38 @@ string getShortestCommonSuperSequence(string &stringOne, string &stringTwo) {
     return answer;
 }
 
-string shortestCommonSuperSequenceAlternate() {
-    // Look at getting lcs directly and going through it;
+string shortestCommonSuperSequenceAlternate(string &txt1, string &txt2) {
+    string lcs = longestCommonSubsequenceStrings(txt1, txt2);
+    int one = 0;
+    int two = 0;
+    string answer;
+    for (char letter : lcs) {
 
+        while (txt1[one] != letter) {
+            answer += txt1[one];
+            ++one;
+        }
+
+        while (txt2[two] != letter) {
+            answer += txt2[two];
+            ++two;
+        }
+
+        answer += letter;
+        ++one;
+        ++two;
+    }
+
+    while (one < txt1.size()) {
+        answer += txt1[one];
+        ++one;
+    }
+    while (two < txt2.size()) {
+        answer += txt2[two];
+        ++two;
+    }
+
+    return answer;
 }
 
 void testShortestCommonSuperSequence() {
@@ -87,4 +117,5 @@ void testShortestCommonSuperSequence() {
     string txt2 = "bbababbb";
 
     cout << getShortestCommonSuperSequence(txt1, txt2) << endl;
+    cout << shortestCommonSuperSequenceAlternate(txt1, txt2) << endl;
 }
