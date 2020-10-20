@@ -1,0 +1,12 @@
+//
+// Created by Tharuka Devendra on 13/10/2020.
+//
+
+#ifndef ALGORITHMS_LONGESTCOMMONSEQUENCESTRING_H
+#define ALGORITHMS_LONGESTCOMMONSEQUENCESTRING_H
+
+
+void testCommonSequenceString();
+
+
+#endif //ALGORITHMS_LONGESTCOMMONSEQUENCESTRING_H

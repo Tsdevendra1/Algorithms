@@ -2,7 +2,7 @@
 // Created by Tharuka Devendra on 13/10/2020.
 //
 
-#include "CommonSequenceString.h"
+#include "LongestCommonSequenceString.h"
 #include "string"
 #include "iostream"
 #include "vector"
@@ -58,8 +58,30 @@ string getCommonSequenceString(string &stringOne, string &stringTwo) {
     return answer;
 }
 
+string longestCommonSubsequenceStrings(string &txt1, string &txt2) {
+    int n = txt1.size();
+    int m = txt2.size();
+    vector<vector<string>> dp(txt1.size() + 1, vector<string>(txt2.size() + 1));
+    for (int one = 0; one < n; ++one) {
+        for (int two = 0; two < m; ++two) {
+            int oneIndex = one + 1;
+            int twoIndex = two + 1;
+            if (txt1[one] == txt2[two]) {
+                dp[oneIndex][twoIndex] = dp[oneIndex - 1][twoIndex - 1] + txt1[one];
+            } else {
+                int backOne = dp[oneIndex - 1][twoIndex].size();
+                int backTwo = dp[oneIndex][twoIndex - 1].size();
+                dp[oneIndex][twoIndex] = backOne > backTwo ? dp[oneIndex - 1][twoIndex] : dp[oneIndex][twoIndex - 1];
+            }
+        }
+    }
+
+    return dp.back().back();
+}
+
 void testCommonSequenceString() {
     string txt1 = "AGGTAB";
     string txt2 = "GXTXAYB";
     cout << getCommonSequenceString(txt1, txt2) << endl;
+    cout << longestCommonSubsequenceStrings(txt1, txt2) << endl;
 }

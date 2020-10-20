@@ -76,6 +76,11 @@ string getShortestCommonSuperSequence(string &stringOne, string &stringTwo) {
     return answer;
 }
 
+string shortestCommonSuperSequenceAlternate() {
+    // Look at getting lcs directly and going through it;
+
+}
+
 void testShortestCommonSuperSequence() {
 
     string txt1 = "bbbaaaba";
